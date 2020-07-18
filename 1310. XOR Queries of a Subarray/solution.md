@@ -3,7 +3,7 @@ I would recommend readers to solve [303. Range Sum Query - Immutable](https://le
 The problem is easy once you realise precomputation of prefixes can be used and the fact that similar to subtraction being the inverse operation for addition, XOR is the inverse operation for XOR.
 
         
-Let range_xor(L, R) denote the XOR of elements from indices L to R in the given array and ^ denote the XOR operation.
+Let ***range_xor(L, R)*** denote the XOR of elements from indices L to R in the given array and `^` denote the XOR operation.
 
 # Theory
 1. XOR of a number with itself is 0. 
@@ -22,16 +22,17 @@ The meaning of prefix XOR is easy to understand. `prefix_xor[i]` is the XOR of a
 
 *prefix_xor* can be precomputed as follows:    
 As there is only arr[0] in the range [0,0]:    
-    >   range_xor(0,0) = arr[0]    
+>   range_xor(0,0) = `arr[0]`    
 For i > 0:          
-    >   range_xor(0, i) = arr[i] ^ range_xor(0, i - 1)
-
-The same is implemeneted in C++ code as follows:
+>   range_xor(0, i) = `arr[i] ^` range_xor(0, i - 1)   
+    
+The same is implemented in C++ as follows:
 ```       
 prefix_xor[0] = arr[0];
 for(int i = 1; i < arr.size(); ++i)
     prefix_xor[i] = arr[i]^prefix_xor[i - 1];   
 ```    
+Mathematically,    
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%280%2C%20R_i%29%20%3D%20range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%28L_i%2C%20R_i%29)   
 ![equation](https://latex.codecogs.com/png.latex?%5Ctextup%7BXOR%20both%20sides%20with%20%7D%20range%5C_xor%280%2C%20L_i%20-%201%29%3A)   
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%280%2C%20R_i%29%20%3D%20range%5C_xor%28L_i%2C%20R_i%29)    
@@ -68,10 +69,12 @@ public:
 ```
 ## Time Complexity
 ### Time 
-![equation](https://latex.codecogs.com/gif.latex?o%28n%20&plus;%20m%29) where n is the number of elements, and m is the number of queries.
+![equation](https://latex.codecogs.com/gif.latex?O%28n%20&plus;%20m%29)    
+where n is the number of elements, and m is the number of queries.
 
 ### Memory 
-![equation](https://latex.codecogs.com/gif.latex?o%28n%29) extra space to store the precomputation array, prefix_xor.
+![equation](https://latex.codecogs.com/gif.latex?O%28n%29)    
+extra space to store the precomputation array, prefix_xor.
 
 
 ### Bonus
