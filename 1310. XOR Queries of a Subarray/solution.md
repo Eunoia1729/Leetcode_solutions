@@ -33,7 +33,7 @@ for(int i = 1; i < arr.size(); ++i)
     prefix_xor[i] = arr[i]^prefix_xor[i - 1];   
 ```    
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%280%2C%20R_i%29%20%3D%20range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%28L_i%2C%20R_i%29)   
-![equation](https://latex.codecogs.com/png.latex?%5Ctextup%7BXOR%20both%20sides%20with%20%7D%20range%5C_xor%281%2C%20L_i%20-%201%29%3A)   
+![equation](https://latex.codecogs.com/png.latex?%5Ctextup%7BXOR%20both%20sides%20with%20%7D%20range%5C_xor%280%2C%20L_i%20-%201%29%3A)   
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%280%2C%20R_i%29%20%3D%20range%5C_xor%28L_i%2C%20R_i%29)    
 ![equation](https://latex.codecogs.com/png.latex?%5Ctextup%7BAfter%20re-arranging%2C%20we%20get%3A%7D)   
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%28L_i%2C%20R_i%29%20%3D%20range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%280%2C%20R_i%29)         
@@ -67,47 +67,12 @@ public:
 };   
 ```
 ## Time Complexity
-    Time: ![equation](https://latex.codecogs.com/gif.latex?O(n&space;&plus;&space;m)) , where n is the number of elements, and m is the number of queries.
-    Memory: O(n) extra space to store the precomputation array, prefix_xor.
-    
+### Time 
+![equation](https://latex.codecogs.com/gif.latex?o%28n%20&plus;%20m%29) where n is the number of elements, and m is the number of queries.
 
-### Bonus:
-    Extra space can be made O(1) by computing the prefix XOR in-place on the array, *arr*..   
-Re-arranging, we get:    
-  > range_xor(L<sub>*i*</sub>, R<sub>*i*</sub>) = range_xor(0, L<sub>*i*</sub> - 1)^range_xor(0, R<sub>*i*</sub>)   
-   
-Thus, the precomputed XOR's can be used to obtain range_xor(L<sub>*i*</sub>, R<sub>*i*</sub>) using the above formula. 
+### Memory 
+![equation](https://latex.codecogs.com/gif.latex?o%28n%29) extra space to store the precomputation array, prefix_xor.
 
-## Code
-```   
-class Solution {
-public:
-    vector<int> xorQueries(vector<int>& arr, vector<vector<int>>& queries) {
 
-        vector<int> prefix_xor( arr.size()); 
-
-        prefix_xor[0] = arr[0];
-        for( int i = 1; i < arr.size(); ++i)
-            prefix_xor[i] = arr[i] ^ prefix_xor[i - 1];
-
-        vector<int> res;
-        int left, right;
-        for( auto query: queries) {
-            left = query[0], right = query[1];
-            if( left == 0)
-                res.push_back( prefix_xor[right] );
-            else
-                res.push_back( prefix_xor[left - 1] ^ prefix_xor[right] );
-        }
-
-        return res;
-    }
-};   
-```
-## Time Complexity
-    Time: ![equation](https://latex.codecogs.com/gif.latex?O(n&space;&plus;&space;m)) , where n is the number of elements, and m is the number of queries.
-    Memory: O(n) extra space to store the precomputation array, prefix_xor.
-    
-
-### Bonus:
-    Extra space can be made O(1) by computing the prefix XOR in-place on the array, *arr*.
+### Bonus
+Extra space can be made ![equation](https://latex.codecogs.com/gif.latex?O%281%29) by computing the prefix XOR in-place on the array, *arr*.
