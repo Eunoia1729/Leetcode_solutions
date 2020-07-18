@@ -14,8 +14,8 @@ Let ***range_xor(L, R)*** denote the XOR of elements from indices L to R in the 
 # Approach (Caching)
 ## Intuition:
 
-As a naive approach, we can use a for loop to XOR each element in the range [L<sub>*i*</sub>, R<sub>*i*</sub>] for each query.
-If the number of queries are large, for an arbitary range [l, r] we might have computed *range_xor(l, r)* more than once. Thus, there are repeated subtasks and caching might help you cut-off repeated same computations for the range queries.
+As a naive approach, we can use a for loop to XOR each element in the range [L<sub>*i*</sub>, R<sub>*i*</sub>] for each query.    
+If the number of queries are large, for an arbitary range [l, r] we might have computed *range_xor(l, r)* more than once. Thus, there are repeated subtasks and caching might help you cut-off repeated same computations for the range queries.     
 Here, the precomputation/caching is storing the prefix XORs.
 
 The meaning of prefix XOR is easy to understand. `prefix_xor[i]` is the XOR of `arr[0..i]` or in other words, *range_xor(0, i)*.
