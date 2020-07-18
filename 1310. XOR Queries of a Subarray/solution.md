@@ -72,14 +72,14 @@ public:
     }
 };   
 ```
-## Time Complexity
-### Time 
+## Complexity Analysis   
+### Time complexity
 ![equation](https://latex.codecogs.com/gif.latex?O%28n%20&plus;%20m%29)    
 where n is the number of elements, and m is the number of queries.   
 Precomputation takes n units of time as a for-loop is run over the whole array. For each query, it takes constant time to get the result. 
 Thus, it takes n units for caching and m units for queries.
 
-### Memory 
+### Space complexity    
 ![equation](https://latex.codecogs.com/gif.latex?O%28n%29)    
 The linear extra space is required to store the precomputation array, `prefix_xor`.
 
