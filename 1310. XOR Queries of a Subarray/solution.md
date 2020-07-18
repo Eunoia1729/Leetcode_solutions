@@ -15,22 +15,22 @@ Let ***range_xor(L, R)*** denote the XOR of elements from indices L to R in the 
 ## Intuition:
 
 As a naive approach, we can use a for loop to XOR each element in the range [L<sub>*i*</sub>, R<sub>*i*</sub>] for each query.
-If the number of queries are large, for an arbitary range [l, r] we might have computed range_xor(l, r) more than once. Thus, there are repeated subtasks and caching might help you cut-off repeated same computations for the range queries.
+If the number of queries are large, for an arbitary range [l, r] we might have computed *range_xor(l, r)* more than once. Thus, there are repeated subtasks and caching might help you cut-off repeated same computations for the range queries.
 Here, the precomputation/caching is storing the prefix XORs.
 
-The meaning of prefix XOR is easy to understand. `prefix_xor[i]` is the XOR of arr[0..i] or in other words, range_xor(0, i).
+The meaning of prefix XOR is easy to understand. `prefix_xor[i]` is the XOR of `arr[0..i]` or in other words, *range_xor(0, i)*.
 
 *prefix_xor* can be precomputed as follows:    
-As there is only arr[0] in the range [0,0]:    
->   range_xor(0,0) = `arr[0]`    
-For i > 0:          
->   range_xor(0, i) = `arr[i] ^` range_xor(0, i - 1)   
+1. As there is only `arr[0]` in the range [0,0]:    
+>       range_xor(0,0) = arr[0]    
+2. For i > 0:          
+>       range_xor(0, i) = arr[i] ^ range_xor(0, i - 1)   
     
 The same is implemented in C++ as follows:
 ```       
 prefix_xor[0] = arr[0];
 for(int i = 1; i < arr.size(); ++i)
-    prefix_xor[i] = arr[i]^prefix_xor[i - 1];   
+    prefix_xor[i] = arr[i] ^ prefix_xor[i - 1];   
 ```    
 Mathematically,    
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%280%2C%20R_i%29%20%3D%20range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%28L_i%2C%20R_i%29)   
@@ -41,6 +41,10 @@ Mathematically,
 
 Thus, the precomputed XOR's can be used to obtain range_xor(L<sub>*i*</sub>, R<sub>*i*</sub>) using the above formula. 
 
+The same is implemented in C++ as follows:
+```
+query_res = prefix_xor[left - 1] ^ prefix_xor[right];
+```
 ## Code
 ```   
 class Solution {
@@ -74,8 +78,8 @@ where n is the number of elements, and m is the number of queries.
 
 ### Memory 
 ![equation](https://latex.codecogs.com/gif.latex?O%28n%29)    
-extra space to store the precomputation array, prefix_xor.
+extra space to store the precomputation array, `prefix_xor`.
 
 
 ### Bonus
-Extra space can be made ![equation](https://latex.codecogs.com/gif.latex?O%281%29) by computing the prefix XOR in-place on the array, *arr*.
+Extra space can be made ![equation](https://latex.codecogs.com/gif.latex?O%281%29) by computing the prefix XOR in-place on the array, `arr`.
