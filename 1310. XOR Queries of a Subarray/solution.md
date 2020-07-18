@@ -40,7 +40,7 @@ Mathematically,
 ![equation](https://latex.codecogs.com/png.latex?%5Ctextup%7BAfter%20re-arranging%2C%20we%20get%3A%7D)   
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%28L_i%2C%20R_i%29%20%3D%20range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%280%2C%20R_i%29)         
 
-Thus, the precomputed XOR's can be used to obtain range_xor(L<sub>*i*</sub>, R<sub>*i*</sub>) using the above formula. 
+Thus, the precomputed XOR's can be used to obtain *range_xor(L<sub>*i*</sub>, R<sub>*i*</sub>)* using the above formula. 
 
 The same is implemented in C++ as follows:
 ```C++
