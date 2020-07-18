@@ -6,9 +6,9 @@ The problem is easy once you realise precomputation of prefixes can be used and 
 Let ***range_xor(L, R)*** denote the XOR of elements from indices L to R in the given array and `^` denote the XOR operation.
 
 # Theory
-1. XOR of a number with itself is 0. 
+1. XOR of any number, *A* with itself is 0. 
    >     A ^ A = 0
-2. XOR of a number with 0 is the number itself. 
+2. XOR of any number, *A* with 0 is the number itself. 
    >     A ^ 0 = A
 
 # Approach (Caching)
@@ -27,7 +27,7 @@ The meaning of prefix XOR is easy to understand. `prefix_xor[i]` is the XOR of `
 >       range_xor(0, i) = arr[i] ^ range_xor(0, i - 1)   
     
 The same is implemented in C++ as follows:
-```       
+```C++       
 prefix_xor[0] = arr[0];
 for(int i = 1; i < arr.size(); ++i)
     prefix_xor[i] = arr[i] ^ prefix_xor[i - 1];   
@@ -42,11 +42,11 @@ Mathematically,
 Thus, the precomputed XOR's can be used to obtain range_xor(L<sub>*i*</sub>, R<sub>*i*</sub>) using the above formula. 
 
 The same is implemented in C++ as follows:
-```
+```C++
 query_res = prefix_xor[left - 1] ^ prefix_xor[right];
 ```
 ## Code
-```   
+```C++   
 class Solution {
 public:
     vector<int> xorQueries(vector<int>& arr, vector<vector<int>>& queries) {
