@@ -33,6 +33,7 @@ for(int i = 1; i < arr.size(); ++i)
     prefix_xor[i] = arr[i] ^ prefix_xor[i - 1];   
 ```    
 Mathematically,    
+
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%280%2C%20R_i%29%20%3D%20range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%28L_i%2C%20R_i%29)   
 ![equation](https://latex.codecogs.com/png.latex?%5Ctextup%7BXOR%20both%20sides%20with%20%7D%20range%5C_xor%280%2C%20L_i%20-%201%29%3A)   
 ![equation](https://latex.codecogs.com/png.latex?range%5C_xor%280%2C%20L_i%20-%201%29%20%5Coplus%20range%5C_xor%280%2C%20R_i%29%20%3D%20range%5C_xor%28L_i%2C%20R_i%29)    
@@ -74,12 +75,38 @@ public:
 ## Time Complexity
 ### Time 
 ![equation](https://latex.codecogs.com/gif.latex?O%28n%20&plus;%20m%29)    
-where n is the number of elements, and m is the number of queries.
+where n is the number of elements, and m is the number of queries.   
+Precomputation takes n units of time as a for-loop is run over the whole array. For each query, it takes constant time to get the result. 
+Thus, it takes n units for caching and m units for queries.
 
 ### Memory 
 ![equation](https://latex.codecogs.com/gif.latex?O%28n%29)    
-extra space to store the precomputation array, `prefix_xor`.
+The linear extra space is required to store the precomputation array, `prefix_xor`.
 
 
 ### Bonus
-Extra space can be made ![equation](https://latex.codecogs.com/gif.latex?O%281%29) by computing the prefix XOR in-place on the array, `arr`.
+Extra space can be made contsant by computing the prefix XOR in-place on the array, `arr`.
+The same is implemented in C++ as follows:
+```C++
+class Solution {
+public:
+    vector<int> xorQueries(vector<int>& arr, vector<vector<int>>& queries) {
+        
+        for(int i = 1; i < arr.size(); ++i)
+            arr[i] = arr[i] ^ arr[i - 1];
+        
+        vector<int> res;
+        int left, right;
+        for( auto query: queries)
+        {
+            left = query[0], right = query[1];
+            if( left == 0)
+                res.push_back( arr[right] );
+            else
+                res.push_back( arr[left - 1] ^ arr[right] );
+        }
+        
+        return res;
+    }
+};
+```
